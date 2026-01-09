@@ -8,6 +8,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+from datetime import datetime
+
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
@@ -16,6 +18,18 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return f'<Usuario {self.nombre}>'
+    
+class Transaccion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    monto = db.Column(db.Float, nullable=False)
+    descripcion = db.Column(db.String(200), nullable=False)
+    tipo = db.Column(db.String(10), nullable=False) # 'ingreso' o 'gasto'
+    fecha = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
+
+    def __repr__(self):
+        return f'<Transaccion {self.tipo}: {self.monto}>'
 
 @app.route('/')
 def home():
