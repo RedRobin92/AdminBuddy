@@ -1,6 +1,21 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Usuario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50), nullable=False)
+    apellido = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Usuario {self.nombre}>'
 
 @app.route('/')
 def home():
@@ -12,10 +27,19 @@ def registro():
     apellido = request.form.get('apellido')
     email = request.form.get('email')
 
-    print(f"Nuevo registro: {nombre} {apellido} - Email: {email}")
+    usuario_existente = Usuario.query.filter_by(email=email).first()
+    if usuario_existente:
+        return f"<h1>El correo {email} ya se encuentra registrado,</h1><p>Por favor intente con otro correo</p>"
+    
+    try:
+        nuevo_usuario = Usuario(nombre=nombre, apellido=apellido, email=email)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
 
-    return f"<h1>¡Gracias {nombre}!</h1><p>Te has registrado exitosamente con el correo {email}.</p>"
-
+        return f"<h1>¡Gracias {nombre}!</h1><p>Te has registrado exitosamente con el correo {email}.</p>"
+    except Exception as e:
+        return "<h1>Hubo un problema</h1><p>No se pudo completar el registro. Por favor, inténtalo de nuevo más tarde.</p>"
+    
 if __name__ == '__main__':
     # debug=True permite que el servidor se reinicie solo cuando haga cambios en el codigo
     app.run(debug=True)
