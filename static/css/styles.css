@@ -41,3 +41,20 @@ h1 {
 .btn-primary:hover {
     background-color: #1557b0
 }
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 12px:
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #1a73e8;
+}
