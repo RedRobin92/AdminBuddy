@@ -48,7 +48,7 @@ h1 {
 
 input {
     width: 100%;
-    padding: 12px:
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
@@ -57,4 +57,45 @@ input {
 
 input:focus {
     border-color: #1a73e8;
+}
+
+.dashboard-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.text-success {
+    color: #28a745;
+}
+.text-danger {
+    color: #dc3545;
+}
+
+.bg-light {
+    background-color: #f8f9fa
+}
+
+header h1 {
+    text-align: center;
+    font-weight: 300;
+    color: #333;
 }

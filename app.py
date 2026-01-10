@@ -54,6 +54,15 @@ def registro():
     except Exception as e:
         return "<h1>Hubo un problema</h1><p>No se pudo completar el registro. Por favor, inténtalo de nuevo más tarde.</p>"
     
+@app.route('/dashboard')
+def dashboard():
+    resumen ={
+        'saldo': 1250.50,
+        'ingresos': 2000.00,
+        'gastos': 749.50
+    }
+    return render_template('dashboard.html', resumen=resumen)
+    
 if __name__ == '__main__':
     # debug=True permite que el servidor se reinicie solo cuando haga cambios en el codigo
     app.run(debug=True)
