@@ -99,3 +99,28 @@ header h1 {
     font-weight: 300;
     color: #333;
 }
+
+.historial-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.minimal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.minimal-table th, .minimal-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.minimal-table th {
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}

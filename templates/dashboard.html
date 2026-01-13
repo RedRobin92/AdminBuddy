@@ -25,6 +25,36 @@
                 <p class="amount text-danger">- ${{ resumen.gastos}}</p>
                 </div>
             </div>
+            <div class="card historial-container">
+                <h2>Historial de transacciones</h2>
+                <table class="minimal-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in transacciones %}
+                        <tr>
+                            <td>{{ t.fecha.strftime('%d/%m/%Y') }}</td>
+                            <td>{{ t.descripcion }}</td>
+                            <td class="'{{ 'text-success' if t.tipo == 'Ingreso' else 'text-danger'}}">
+                                {{ t.tipo }}
+                            </td>
+                            <td>${{ "{:,2.f}".format(t.monto) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4">No hay movimientos registrados</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="actions">

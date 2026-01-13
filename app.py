@@ -56,12 +56,23 @@ def registro():
     
 @app.route('/dashboard')
 def dashboard():
+    transacciones = Transaccion.query.filter_by(user_id=1).all()  # Suponiendo que el usuario con ID 1 está logueado
+
+    ingresos = 0.0
+    gastos = 0.0
+
+    for t in transacciones:
+        if t.tipo == 'ingreso':
+            ingresos += t.monto
+        else:
+            gastos += t.monto
+
     resumen ={
-        'saldo': 1250.50,
-        'ingresos': 2000.00,
-        'gastos': 749.50
+        'saldo': ingresos - gastos,
+        'ingresos': ingresos,
+        'gastos': gastos,
     }
-    return render_template('dashboard.html', resumen=resumen)
+    return render_template('dashboard.html', resumen=resumen, transacciones=transacciones)
     
 if __name__ == '__main__':
     # debug=True permite que el servidor se reinicie solo cuando haga cambios en el codigo
