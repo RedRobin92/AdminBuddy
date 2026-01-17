@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Nueva transacción - Admin Buddy</title>
+        <meta name="description" content="Formulario para crear una nueva transacción">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="card">
+                <h1>Nuevo movimiento</h1>
+                <p style="margin-bottom: 1.5rem; color: #666;">Registra un nuevo movimiento</p>
+
+                <form action="/add_transaction" method="POST">
+                    <div class="input-group">
+                        <input type="number" step="0.01" name="monto" placeholder="Monto (ej: 150.00)" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="descripcion" placeholder="Descripción (ej: Compra laptop)" required>
+                    </div>
+                    <div class="input-group">
+                        <select name="tipo" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;"></select>
+                            <option value="ingreso">Ingreso (+)</option>
+                            <option value="gasto">Gasto (-)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Guardar movimiento</button>
+                </form>
+                <br>
+                <a href="/dashboard" style="text-decoration: none; color: #888; font-size: 0.9rem;">Volver al panel principal</a>
+            </div>
+        </div>
+    </body>
+</html>

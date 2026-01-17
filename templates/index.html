@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>AdminBuddy - Gestiona tus finanzas</title>
+        <meta name="description" content="AdminBuddy te ayuda a gestionar tus finanzas personales de manera eficiente.">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="card">
+                <h1>Registro en AdminBuddy</h1>
+                <form action="/registro" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="apellido" placeholder="Apellido" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Correo Electrónico" required>
+                    </div>
+                    <button type=":submit" class="btn-primary">Registrarme</button>
+                </form>
+                <p>Tu asistente personal para la gestión financiera.</p>
+                <button class="btn-primary">¡Empieza ahora!</button>
+            </div>
+        </div>
+    </body>
+</html>
