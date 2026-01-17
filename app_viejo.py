@@ -80,6 +80,32 @@ if __name__ == '__main__':
     # debug=True permite que el servidor se reinicie solo cuando haga cambios en el codigo
     app.run(debug=True)
 
+@app.route('/add_transaction', methods=['GET', 'POST'])
+def add_transaction():
+    if request.method == 'POST':
+        # 1. Capturamos los datos del formulario
+        monto = request.form.get('monto')
+        descripcion = request.form.get('descripcion')
+        tipo = request.form.get('tipo')
+        
+        # 2. Creamos el registro en la base de datos
+        # Nota: Por ahora usamos user_id=1 manualmente
+        nueva_t = Transaccion(
+            monto=float(monto), 
+            descripcion=descripcion, 
+            tipo=tipo, 
+            user_id=1
+        )
+        
+        db.session.add(nueva_t)
+        db.session.commit()
+        
+        # 3. Redirigimos al Dashboard para ver el cambio
+        return redirect(url_for('dashboard'))
+    
+    # Si es GET, simplemente mostramos el formulario
+    return render_template('nueva_transaccion.html')
+
 @app.route('/debug')
 def debug_check():
     return "La ruta /debug funciona correctamente"
